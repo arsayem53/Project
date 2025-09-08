@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesmin Khalar Vater Hotel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f8f6;
+            min-height: 100vh;
+            padding: 20px;
+            color: #575965;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            border: 1px solid #c3c4c8;
+        }
+        
+        .header {
+            background: #575965;
+            color: white;
+            padding: 32px;
+            text-align: center;
+            border-bottom: 1px solid #939498;
+        }
+        
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.025em;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 32px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #c3c4c8;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        
+        .section h2 {
+            color: #575965;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-bottom: 2px solid #939498;
+            padding-bottom: 12px;
+        }
+        
+        .input-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #575965;
+            font-size: 0.875rem;
+        }
+        
+        input, select {
+            padding: 12px 16px;
+            border: 1px solid #c3c4c8;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            color: #575965;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #939498;
+            box-shadow: 0 0 0 3px rgba(147, 148, 152, 0.1);
+        }
+        
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-clear {
+            background: #ef4444;
+        }
+        
+        .btn-clear:hover {
+            background: #dc2626;
+        }
+
+        .btn-payback {
+            background: #10b981;
+        }
+
+        .btn-payback:hover {
+            background: #059669;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .payback-th {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9ff;
+        }
+        
+        tr:hover {
+            background-color: #e8f0fe;
+        }
+        
+        .monthly-summary {
+            background: #f0f8ff;
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .cost-summary {
+            background: #fff8e1;
+            border: 2px solid #ff9800;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payback-section {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .monthly-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .cost-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .monthly-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .cost-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff9800;
+            text-align: center;
+        }
+        
+        .cost-card h4 {
+            color: #ff6f00;
+            margin-bottom: 8px;
+        }
+        
+        .cost-card .amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e65100;
+        }
+        
+        .delete-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .month-selector {
+            margin-bottom: 20px;
+        }
+        
+        .positive { color: #27ae60; font-weight: bold; }
+        .negative { color: #e74c3c; font-weight: bold; }
+        .zero { color: #7f8c8d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Jesmin Khalar Vater Hotel final Version</h1>
+        </div>
+
+
+        <div class="content">
+            <div class="section">
+                <h2>Add Daily Expense</h2>
+                <div class="input-form">
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseName">Expense Name:</label>
+                        <input type="text" id="expenseName" placeholder="e.g., Lunch, Tea, Market" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="totalAmount">Total Amount (৳):</label>
+                        <input type="number" id="totalAmount" placeholder="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shovonPaid">Shovon Paid (৳):</label>
+                        <input type="number" id="shovonPaid" placeholder="0" step="0.01" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="sayemPaid">Sayem Paid (৳):</label>
+                        <input type="number" id="sayemPaid" placeholder="0" step="0.01" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="tanvirPaid">Tanvir Paid (৳):</label>
+                        <input type="number" id="tanvirPaid" placeholder="0" step="0.01" value="0">
+                    </div>
+                </div>
+                <button class="btn" onclick="addExpense()">Add Expense</button>
+                <button class="btn btn-clear" onclick="clearAllData()">Clear All Data</button>
+            </div>
+
+            <div class="section">
+                <h2>Payback System</h2>
+                <div class="payback-section">
+                    <h3 style="color: #059669; margin-bottom: 16px; font-size: 1.125rem; font-weight: 600;">Record Payment</h3>
+                    <div class="input-form">
+                        <div class="form-group">
+                            <label for="paybackDate">Date:</label>
+                            <input type="date" id="paybackDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="payerName">Who Pays:</label>
+                            <select id="payerName" required>
+                                <option value="">Select Person</option>
+                                <option value="Shovon">Shovon</option>
+                                <option value="Sayem">Sayem</option>
+                                <option value="Tanvir">Tanvir</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="receiverName">Pays To:</label>
+                            <select id="receiverName" required>
+                                <option value="">Select Person</option>
+                                <option value="Shovon">Shovon</option>
+                                <option value="Sayem">Sayem</option>
+                                <option value="Tanvir">Tanvir</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="paybackAmount">Amount (৳):</label>
+                            <input type="number" id="paybackAmount" placeholder="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="paybackNote">Note (Optional):</label>
+                            <input type="text" id="paybackNote" placeholder="e.g., Partial payment, Full settlement">
+                        </div>
+                    </div>
+                    <button class="btn btn-payback" onclick="addPayback()">Record Payback</button>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Settlement Summary</h2>
+                <div class="month-selector">
+                    <label for="monthFilter">Select Month:</label>
+                    <select id="monthFilter" onchange="updateMonthlyView()">
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+                
+                <div class="cost-summary">
+                    <h3 style="color: #e65100; margin-bottom: 16px; font-size: 1.125rem; font-weight: 600;">Monthly Cost Per Person</h3>
+                    <div class="cost-grid" id="costSummary">
+                        <!-- Cost data will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="monthly-summary">
+                    <h3 style="color: #575965; margin-bottom: 16px; font-size: 1.125rem; font-weight: 600;">Net Settlement (After Paybacks)</h3>
+                    <div class="monthly-grid" id="monthlyPayments">
+                        <!-- Monthly data will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Payback History</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr class="payback-th">
+                                <th>Date</th>
+                                <th>Who Paid</th>
+                                <th>Paid To</th>
+                                <th>Amount</th>
+                                <th>Note</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paybackTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Detailed Expense Record</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Expense Name</th>
+                                <th>Total</th>
+                                <th>Shovon Paid</th>
+                                <th>Sayem Paid</th>
+                                <th>Tanvir Paid</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Load existing data from localStorage with enhanced error handling
+        let expenses = [];
+        let paybacks = [];
+
+        function loadData() {
+            try {
+                const expenseData = localStorage.getItem('hotelExpenses');
+                const paybackData = localStorage.getItem('hotelPaybacks');
+                
+                console.log('Raw expense data from localStorage:', expenseData);
+                console.log('Raw payback data from localStorage:', paybackData);
+                
+                expenses = expenseData ? JSON.parse(expenseData) : [];
+                paybacks = paybackData ? JSON.parse(paybackData) : [];
+                
+                console.log('Parsed expenses:', expenses);
+                console.log('Parsed paybacks:', paybacks);
+                
+                // Validate data structure
+                expenses = expenses.filter(exp => exp && exp.id && exp.date && exp.expenseName);
+                paybacks = paybacks.filter(pb => pb && pb.id && pb.date && pb.payer);
+                
+                console.log(`Successfully loaded ${expenses.length} expenses and ${paybacks.length} paybacks`);
+                
+            } catch (error) {
+                console.error('Error loading data from localStorage:', error);
+                expenses = [];
+                paybacks = [];
+                alert('Error loading saved data. Starting fresh. Error: ' + error.message);
+            }
+        }
+
+        function refreshDebugInfo() {
+            const debugOutput = document.getElementById('debugOutput');
+            const expenseData = localStorage.getItem('hotelExpenses');
+            const paybackData = localStorage.getItem('hotelPaybacks');
+            
+            debugOutput.innerHTML = `
+                <strong>LocalStorage Keys:</strong><br>
+                - hotelExpenses: ${expenseData ? 'EXISTS' : 'NOT FOUND'}<br>
+                - hotelPaybacks: ${paybackData ? 'EXISTS' : 'NOT FOUND'}<br><br>
+                
+                <strong>Data Counts:</strong><br>
+                - Expenses loaded: ${expenses.length}<br>
+                - Paybacks loaded: ${paybacks.length}<br><br>
+                
+                <strong>Sample Expense Data:</strong><br>
+                <pre>${expenseData ? expenseData.substring(0, 500) + (expenseData.length > 500 ? '...' : '') : 'None'}</pre>
+                
+                <strong>Sample Payback Data:</strong><br>
+                <pre>${paybackData ? paybackData.substring(0, 300) + (paybackData.length > 300 ? '...' : '') : 'None'}</pre>
+                
+                <strong>Browser Info:</strong><br>
+                - User Agent: ${navigator.userAgent.substring(0, 100)}...<br>
+                - localStorage Available: ${typeof(Storage) !== "undefined" ? 'YES' : 'NO'}
+            `;
+        }
+
+        function exportData() {
+            const data = {
+                expenses: expenses,
+                paybacks: paybacks,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `hotel-expenses-backup-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (data.expenses) {
+                            expenses = data.expenses;
+                        }
+                        if (data.paybacks) {
+                            paybacks = data.paybacks;
+                        }
+                        saveData();
+                        updateDisplay();
+                        alert(`Imported ${expenses.length} expenses and ${paybacks.length} paybacks`);
+                    } catch (error) {
+                        alert('Error importing data: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+        
+        // Initialize data loading
+        loadData();
+        
+        // Set today's date as default
+        document.getElementById('date').valueAsDate = new Date();
+        document.getElementById('paybackDate').valueAsDate = new Date();
+        
+        function addExpense() {
+            const date = document.getElementById('date').value;
+            const expenseName = document.getElementById('expenseName').value.trim();
+            const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+            const shovonPaid = parseFloat(document.getElementById('shovonPaid').value) || 0;
+            const sayemPaid = parseFloat(document.getElementById('sayemPaid').value) || 0;
+            const tanvirPaid = parseFloat(document.getElementById('tanvirPaid').value) || 0;
+            
+            if (!date || !expenseName || totalAmount <= 0) {
+                alert('Please fill in Date, Expense Name, and Total Amount!');
+                return;
+            }
+            
+            if (Math.abs((shovonPaid + sayemPaid + tanvirPaid) - totalAmount) > 0.01) {
+                alert(`Total paid (${(shovonPaid + sayemPaid + tanvirPaid).toFixed(2)}) should equal Total Amount (${totalAmount.toFixed(2)})!`);
+                return;
+            }
+            
+            const expense = {
+                id: Date.now(),
+                date: date,
+                expenseName: expenseName,
+                totalAmount: totalAmount,
+                shovonPaid: shovonPaid,
+                sayemPaid: sayemPaid,
+                tanvirPaid: tanvirPaid
+            };
+            
+            expenses.push(expense);
+            saveData();
+            updateDisplay();
+            clearForm();
+            refreshDebugInfo();
+        }
+
+        function addPayback() {
+            const date = document.getElementById('paybackDate').value;
+            const payer = document.getElementById('payerName').value;
+            const receiver = document.getElementById('receiverName').value;
+            const amount = parseFloat(document.getElementById('paybackAmount').value) || 0;
+            const note = document.getElementById('paybackNote').value.trim();
+            
+            if (!date || !payer || !receiver || amount <= 0) {
+                alert('Please fill in Date, Who Pays, Pays To, and Amount!');
+                return;
+            }
+            
+            if (payer === receiver) {
+                alert('Payer and receiver cannot be the same person!');
+                return;
+            }
+            
+            const payback = {
+                id: Date.now(),
+                date: date,
+                payer: payer,
+                receiver: receiver,
+                amount: amount,
+                note: note
+            };
+            
+            paybacks.push(payback);
+            saveData();
+            updateDisplay();
+            clearPaybackForm();
+            refreshDebugInfo();
+        }
+
+        function deletePayback(id) {
+            if (confirm('Are you sure you want to delete this payback record?')) {
+                paybacks = paybacks.filter(payback => payback.id !== id);
+                saveData();
+                updateDisplay();
+                refreshDebugInfo();
+            }
+        }
+        
+        function calculateGrossSettlements(filteredExpenses) {
+            const grossTotals = {
+                sayemPaysShovon: 0,
+                shovonPaysSayem: 0,
+                tanvirPaysShovon: 0,
+                tanvirPaysSayem: 0,
+                sayemPaysTanvir: 0,
+                shovonPaysTanvir: 0
+            };
+            
+            filteredExpenses.forEach(expense => {
+                const shareEach = expense.totalAmount / 3;
+                const shovonBalance = expense.shovonPaid - shareEach;
+                const sayemBalance = expense.sayemPaid - shareEach;
+                const tanvirBalance = expense.tanvirPaid - shareEach;
+                
+                const settlements = calculateIndividualSettlements(shovonBalance, sayemBalance, tanvirBalance);
+                
+                grossTotals.sayemPaysShovon += settlements.sayemPaysShovon;
+                grossTotals.shovonPaysSayem += settlements.shovonPaysSayem;
+                grossTotals.tanvirPaysShovon += settlements.tanvirPaysShovon;
+                grossTotals.tanvirPaysSayem += settlements.tanvirPaysSayem;
+                grossTotals.sayemPaysTanvir += settlements.sayemPaysTanvir;
+                grossTotals.shovonPaysTanvir += settlements.shovonPaysTanvir;
+            });
+            
+            return grossTotals;
+        }
+
+        function applyPaybacks(grossTotals, filteredPaybacks) {
+            filteredPaybacks.forEach(payback => {
+                const payer = payback.payer;
+                const receiver = payback.receiver;
+                const amount = payback.amount;
+
+                if (payer === 'Sayem' && receiver === 'Shovon') {
+                    grossTotals.sayemPaysShovon = Math.max(0, grossTotals.sayemPaysShovon - amount);
+                } else if (payer === 'Shovon' && receiver === 'Sayem') {
+                    grossTotals.shovonPaysSayem = Math.max(0, grossTotals.shovonPaysSayem - amount);
+                } else if (payer === 'Tanvir' && receiver === 'Shovon') {
+                    grossTotals.tanvirPaysShovon = Math.max(0, grossTotals.tanvirPaysShovon - amount);
+                } else if (payer === 'Tanvir' && receiver === 'Sayem') {
+                    grossTotals.tanvirPaysSayem = Math.max(0, grossTotals.tanvirPaysSayem - amount);
+                } else if (payer === 'Sayem' && receiver === 'Tanvir') {
+                    grossTotals.sayemPaysTanvir = Math.max(0, grossTotals.sayemPaysTanvir - amount);
+                } else if (payer === 'Shovon' && receiver === 'Tanvir') {
+                    grossTotals.shovonPaysTanvir = Math.max(0, grossTotals.shovonPaysTanvir - amount);
+                }
+            });
+
+            return grossTotals;
+        }
+        
+        function calculateIndividualSettlements(shovonBalance, sayemBalance, tanvirBalance) {
+            let settlements = {
+                sayemPaysShovon: 0,
+                shovonPaysSayem: 0,
+                tanvirPaysShovon: 0,
+                tanvirPaysSayem: 0,
+                sayemPaysTanvir: 0,
+                shovonPaysTanvir: 0
+            };
+            
+            if (sayemBalance < -0.01) {
+                if (shovonBalance > 0.01) {
+                    const amount = Math.min(Math.abs(sayemBalance), shovonBalance);
+                    settlements.sayemPaysShovon = amount;
+                    sayemBalance += amount;
+                    shovonBalance -= amount;
+                }
+                if (sayemBalance < -0.01 && tanvirBalance > 0.01) {
+                    const amount = Math.min(Math.abs(sayemBalance), tanvirBalance);
+                    settlements.sayemPaysTanvir = amount;
+                    sayemBalance += amount;
+                    tanvirBalance -= amount;
+                }
+            }
+            
+            if (shovonBalance < -0.01) {
+                if (sayemBalance > 0.01) {
+                    const amount = Math.min(Math.abs(shovonBalance), sayemBalance);
+                    settlements.shovonPaysSayem = amount;
+                    shovonBalance += amount;
+                    sayemBalance -= amount;
+                }
+                if (shovonBalance < -0.01 && tanvirBalance > 0.01) {
+                    const amount = Math.min(Math.abs(shovonBalance), tanvirBalance);
+                    settlements.shovonPaysTanvir = amount;
+                    shovonBalance += amount;
+                    tanvirBalance -= amount;
+                }
+            }
+            
+            if (tanvirBalance < -0.01) {
+                if (sayemBalance > 0.01) {
+                    const amount = Math.min(Math.abs(tanvirBalance), sayemBalance);
+                    settlements.tanvirPaysSayem = amount;
+                    tanvirBalance += amount;
+                    sayemBalance -= amount;
+                }
+                if (tanvirBalance < -0.01 && shovonBalance > 0.01) {
+                    const amount = Math.min(Math.abs(tanvirBalance), shovonBalance);
+                    settlements.tanvirPaysShovon = amount;
+                    tanvirBalance += amount;
+                    shovonBalance -= amount;
+                }
+            }
+            
+            return settlements;
+        }
+        
+        function updateDisplay() {
+            updateExpenseTable();
+            updatePaybackTable();
+            updateMonthOptions();
+            updateMonthlyView();
+            refreshDebugInfo();
+        }
+        
+        function updateExpenseTable() {
+            const tbody = document.getElementById('expenseTableBody');
+            tbody.innerHTML = '';
+            
+            const sortedExpenses = [...expenses].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            sortedExpenses.forEach(expense => {
+                const row = tbody.insertRow();
+                
+                row.innerHTML = `
+                    <td>${new Date(expense.date).toLocaleDateString()}</td>
+                    <td>${expense.expenseName}</td>
+                    <td>৳${expense.totalAmount.toFixed(2)}</td>
+                    <td>৳${expense.shovonPaid.toFixed(2)}</td>
+                    <td>৳${expense.sayemPaid.toFixed(2)}</td>
+                    <td>৳${expense.tanvirPaid.toFixed(2)}</td>
+                    <td><button class="delete-btn" onclick="deleteExpense(${expense.id})">Delete</button></td>
+                `;
+            });
+        }
+
+        function updatePaybackTable() {
+            const tbody = document.getElementById('paybackTableBody');
+            tbody.innerHTML = '';
+            
+            const sortedPaybacks = [...paybacks].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            sortedPaybacks.forEach(payback => {
+                const row = tbody.insertRow();
+                
+                row.innerHTML = `
+                    <td>${new Date(payback.date).toLocaleDateString()}</td>
+                    <td>${payback.payer}</td>
+                    <td>${payback.receiver}</td>
+                    <td>৳${payback.amount.toFixed(2)}</td>
+                    <td>${payback.note || '-'}</td>
+                    <td><button class="delete-btn" onclick="deletePayback(${payback.id})">Delete</button></td>
+                `;
+            });
+        }
+        
+        function updateMonthOptions() {
+            const select = document.getElementById('monthFilter');
+            const expenseMonths = [...new Set(expenses.map(e => e.date.substring(0, 7)))];
+            const paybackMonths = [...new Set(paybacks.map(p => p.date.substring(0, 7)))];
+            const allMonths = [...new Set([...expenseMonths, ...paybackMonths])].sort().reverse();
+            
+            select.innerHTML = '<option value="all">All Time</option>';
+            allMonths.forEach(month => {
+                const option = document.createElement('option');
+                option.value = month;
+                option.textContent = new Date(month + '-01').toLocaleDateString('en', { month: 'long', year: 'numeric' });
+                select.appendChild(option);
+            });
+        }
+        
+        function updateMonthlyView() {
+            const selectedMonth = document.getElementById('monthFilter').value;
+            const filteredExpenses = selectedMonth === 'all' ? expenses : expenses.filter(e => e.date.startsWith(selectedMonth));
+            const filteredPaybacks = selectedMonth === 'all' ? paybacks : paybacks.filter(p => p.date.startsWith(selectedMonth));
+            
+            // Calculate total expenses for the cost summary
+            const totalExpenses = filteredExpenses.reduce((sum, expense) => sum + expense.totalAmount, 0);
+            const groceryPerPerson = totalExpenses / 3;
+            const totalPerPerson = (totalExpenses + 3000) / 3; // 3000 is aunty's fee (1000 per person)
+            
+            // Update cost summary
+            const costDiv = document.getElementById('costSummary');
+            costDiv.innerHTML = `
+                <div class="cost-card">
+                    <h4>Grocery Per Person</h4>
+                    <p class="amount">৳${groceryPerPerson.toFixed(2)}</p>
+                </div>
+                <div class="cost-card">
+                    <h4>Total Per Person</h4>
+                    <p class="amount">৳${totalPerPerson.toFixed(2)}</p>
+                </div>
+            `;
+            
+            // Calculate gross settlements and apply paybacks
+            let grossTotals = calculateGrossSettlements(filteredExpenses);
+            grossTotals = applyPaybacks(grossTotals, filteredPaybacks);
+            
+            // Calculate net amounts for each pair
+            const netSayemToShovon = Math.max(0, grossTotals.sayemPaysShovon - grossTotals.shovonPaysSayem);
+            const netShovonToSayem = Math.max(0, grossTotals.shovonPaysSayem - grossTotals.sayemPaysShovon);
+            const netTanvirToShovon = Math.max(0, grossTotals.tanvirPaysShovon - grossTotals.shovonPaysTanvir);
+            const netShovonToTanvir = Math.max(0, grossTotals.shovonPaysTanvir - grossTotals.tanvirPaysShovon);
+            const netSayemToTanvir = Math.max(0, grossTotals.sayemPaysTanvir - grossTotals.tanvirPaysSayem);
+            const netTanvirToSayem = Math.max(0, grossTotals.tanvirPaysSayem - grossTotals.sayemPaysTanvir);
+            
+            const monthlyDiv = document.getElementById('monthlyPayments');
+            monthlyDiv.innerHTML = `
+                <div class="monthly-card">
+                    <h4>Sayem → Shovon</h4>
+                    <p class="${netSayemToShovon > 0 ? 'positive' : 'zero'}">৳${netSayemToShovon.toFixed(2)}</p>
+                </div>
+                <div class="monthly-card">
+                    <h4>Shovon → Sayem</h4>
+                    <p class="${netShovonToSayem > 0 ? 'positive' : 'zero'}">৳${netShovonToSayem.toFixed(2)}</p>
+                </div>
+                <div class="monthly-card">
+                    <h4>Tanvir → Shovon</h4>
+                    <p class="${netTanvirToShovon > 0 ? 'positive' : 'zero'}">৳${netTanvirToShovon.toFixed(2)}</p>
+                </div>
+                <div class="monthly-card">
+                    <h4>Tanvir → Sayem</h4>
+                    <p class="${netTanvirToSayem > 0 ? 'positive' : 'zero'}">৳${netTanvirToSayem.toFixed(2)}</p>
+                </div>
+                <div class="monthly-card">
+                    <h4>Sayem → Tanvir</h4>
+                    <p class="${netSayemToTanvir > 0 ? 'positive' : 'zero'}">৳${netSayemToTanvir.toFixed(2)}</p>
+                </div>
+                <div class="monthly-card">
+                    <h4>Shovon → Tanvir</h4>
+                    <p class="${netShovonToTanvir > 0 ? 'positive' : 'zero'}">৳${netShovonToTanvir.toFixed(2)}</p>
+                </div>
+            `;
+        }
+        
+        function deleteExpense(id) {
+            if (confirm('Are you sure you want to delete this expense?')) {
+                expenses = expenses.filter(expense => expense.id !== id);
+                saveData();
+                updateDisplay();
+            }
+        }
+        
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all expenses and paybacks? This cannot be undone!')) {
+                expenses = [];
+                paybacks = [];
+                saveData();
+                updateDisplay();
+            }
+        }
+        
+        function clearForm() {
+            document.getElementById('expenseName').value = '';
+            document.getElementById('totalAmount').value = '';
+            document.getElementById('shovonPaid').value = '0';
+            document.getElementById('sayemPaid').value = '0';
+            document.getElementById('tanvirPaid').value = '0';
+        }
+
+        function clearPaybackForm() {
+            document.getElementById('payerName').value = '';
+            document.getElementById('receiverName').value = '';
+            document.getElementById('paybackAmount').value = '';
+            document.getElementById('paybackNote').value = '';
+        }
+        
+        function saveData() {
+            try {
+                localStorage.setItem('hotelExpenses', JSON.stringify(expenses));
+                localStorage.setItem('hotelPaybacks', JSON.stringify(paybacks));
+                console.log(`Saved ${expenses.length} expenses and ${paybacks.length} paybacks to localStorage`);
+            } catch (error) {
+                console.error('Error saving data to localStorage:', error);
+                alert('Error saving data: ' + error.message);
+            }
+        }
+        
+        // Auto-fill remaining amount
+        document.getElementById('totalAmount').addEventListener('input', autoFillPaid);
+        document.getElementById('shovonPaid').addEventListener('input', autoFillPaid);
+        document.getElementById('sayemPaid').addEventListener('input', autoFillPaid);
+        document.getElementById('tanvirPaid').addEventListener('input', autoFillPaid);
+        
+        function autoFillPaid() {
+            const total = parseFloat(document.getElementById('totalAmount').value) || 0;
+            const shovon = parseFloat(document.getElementById('shovonPaid').value) || 0;
+            const sayem = parseFloat(document.getElementById('sayemPaid').value) || 0;
+            const tanvir = parseFloat(document.getElementById('tanvirPaid').value) || 0;
+            
+            const remaining = total - shovon - sayem - tanvir;
+            
+            // Auto-fill logic
+            if (remaining > 0) {
+                if (shovon === 0 && sayem > 0 && tanvir > 0) {
+                    document.getElementById('shovonPaid').value = remaining.toFixed(2);
+                } else if (sayem === 0 && shovon > 0 && tanvir > 0) {
+                    document.getElementById('sayemPaid').value = remaining.toFixed(2);
+                } else if (tanvir === 0 && shovon > 0 && sayem > 0) {
+                    document.getElementById('tanvirPaid').value = remaining.toFixed(2);
+                }
+            }
+        }
+        
+        // Initialize display on page load
+        setTimeout(() => {
+            updateDisplay();
+        }, 100);
+    </script>
+</body>
+</html>
